@@ -1,11 +1,7 @@
-# Databricks notebook source
-# MAGIC %md
-# MAGIC # Data Quality — Funções Utilitárias de Qualidade
-# MAGIC
-# MAGIC Módulo com funções reutilizáveis de quality checks para as 3 camadas Medallion.
-# MAGIC Logs gravados em `workspace.{layer}.quality_logs` (AD-6).
-
-# COMMAND ----------
+"""
+Módulo com funções reutilizáveis de quality checks para as 3 camadas Medallion.
+Logs gravados em `workspace.{layer}.quality_logs` (AD-6).
+"""
 
 from datetime import datetime
 from pyspark.sql import DataFrame, SparkSession

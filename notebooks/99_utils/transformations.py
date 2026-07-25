@@ -1,11 +1,7 @@
-# Databricks notebook source
-# MAGIC %md
-# MAGIC # Transformations — Funções Utilitárias de Transformação
-# MAGIC
-# MAGIC Funções reutilizáveis com lógica de negócio específica ao Olist.
-# MAGIC Importar nos notebooks Silver e Gold: `from transformations import *`
-
-# COMMAND ----------
+"""
+Funções reutilizáveis com lógica de negócio específica ao Olist.
+Importar nos notebooks Silver e Gold: `from transformations import *`
+"""
 
 from pyspark.sql import DataFrame
 from pyspark.sql import functions as F

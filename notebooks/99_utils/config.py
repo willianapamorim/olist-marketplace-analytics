@@ -1,11 +1,7 @@
-# Databricks notebook source
-# MAGIC %md
-# MAGIC # Config — Olist Marketplace Analytics Platform
-# MAGIC
-# MAGIC Módulo de configuração central. Todos os notebooks importam deste arquivo.
-# MAGIC Use: `from config import Config`
-
-# COMMAND ----------
+"""
+Módulo de configuração central. Todos os notebooks importam deste arquivo.
+Use: `from config import Config`
+"""
 
 
 class Config:
