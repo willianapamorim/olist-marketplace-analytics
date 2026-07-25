@@ -21,19 +21,21 @@ def ingest_csv_to_bronze(file_name: str, table_name: str):
     """
     Ingere um CSV usando Auto Loader (cloudFiles) e salva como Delta na camada Bronze.
     """
+    import time
     print(f"📦 Ingerindo {file_name} -> {Config.bronze(table_name)}")
     
-    file_path = f"{Config.RAW_VOLUME_PATH}{file_name}"
+    directory_path = Config.RAW_VOLUME_PATH
     checkpoint_path = f"{Config.CHECKPOINT_BASE_PATH}{table_name}"
     
-    # 1. Leitura via Auto Loader (cloudFiles)
+    # 1. Leitura via Auto Loader (cloudFiles) no diretorio raiz com pathGlobFilter
     df_raw = spark.readStream \
         .format("cloudFiles") \
         .option("cloudFiles.format", "csv") \
         .option("cloudFiles.inferColumnTypes", "true") \
         .option("cloudFiles.schemaLocation", checkpoint_path + "/schema") \
+        .option("pathGlobFilter", file_name) \
         .option("header", "true") \
-        .load(file_path)
+        .load(directory_path)
         
     # 2. Adicionar metadados obrigatórios (AC Story 2.1 e 1.4)
     df_enriched = add_ingestion_metadata(df_raw)
@@ -47,6 +49,7 @@ def ingest_csv_to_bronze(file_name: str, table_name: str):
         .table(Config.bronze(table_name))
         
     query.awaitTermination()
+    time.sleep(2) # Pequeno sleep para Spark Connect Serverless estabilizar estado entre streams
     print(f"  ✅ Concluído: {table_name}")
 
 # COMMAND ----------
