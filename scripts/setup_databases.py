@@ -14,7 +14,7 @@
 # COMMAND ----------
 
 import sys
-sys.path.insert(0, "/Workspace/Repos/<seu-usuario>/olist-marketplace-analytics/notebooks/99_utils")
+sys.path.insert(0, "/Workspace/Repos/willianapamorim@gmail.com/olist-marketplace-analytics/notebooks/99_utils")
 
 from config import Config
 from data_quality import create_quality_logs_table
