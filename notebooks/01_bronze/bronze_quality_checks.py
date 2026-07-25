@@ -14,6 +14,7 @@ from data_quality import log_quality_check, check_count_positive, check_null_rat
 # MAGIC %md
 # MAGIC ## 1. Validações Básicas: Contagem de Registros
 
+# COMMAND ----------
 print("📊 Executando Quality Checks — Camada Bronze\n")
 
 for table in Config.BRONZE_ALL_TABLES:
@@ -33,6 +34,7 @@ for table in Config.BRONZE_ALL_TABLES:
 # MAGIC %md
 # MAGIC ## 2. Validações Específicas Olist
 
+# COMMAND ----------
 # 2.1 - olist_orders: order_id não nulo
 df_orders = spark.table(Config.bronze(Config.BRONZE_ORDERS))
 null_rate, null_count, total = check_null_rate(df_orders, "order_id")

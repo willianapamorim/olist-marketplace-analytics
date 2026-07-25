@@ -16,6 +16,7 @@ from transformations import add_ingestion_metadata
 # MAGIC %md
 # MAGIC ## Configuração do Auto Loader
 
+# COMMAND ----------
 def ingest_csv_to_bronze(file_name: str, table_name: str):
     """
     Ingere um CSV usando Auto Loader (cloudFiles) e salva como Delta na camada Bronze.
@@ -52,6 +53,7 @@ def ingest_csv_to_bronze(file_name: str, table_name: str):
 # MAGIC %md
 # MAGIC ## Execução da Ingestão
 
+# COMMAND ----------
 # Mapeamento CSV -> Tabela Bronze (AC Story 2.1)
 ingestion_map = {
     "olist_orders_dataset.csv": Config.BRONZE_ORDERS,
