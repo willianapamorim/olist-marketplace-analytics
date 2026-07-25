@@ -1,0 +1,61 @@
+# ============================================================
+# Olist Marketplace Analytics Platform — .gitignore
+# ============================================================
+
+# ─── BMad Framework (ferramentas de planejamento — NÃO commitar) ──────────────
+_bmad/
+_bmad-output/
+.agents/
+.agent/
+.claude/
+.cortex/
+.github/
+design-artifacts/
+
+# ─── Dados brutos (nunca commitar os CSVs originais) ─────────────────────────
+data/raw/
+data/raw/*.csv
+
+# ─── Power BI (arquivo binário, gerenciar externamente) ───────────────────────
+*.pbix
+powerbi/*.pbix
+
+# ─── Credenciais e variáveis de ambiente ──────────────────────────────────────
+*.env
+.env.local
+.databricks/
+databricks.yml.local
+
+# ─── Python ───────────────────────────────────────────────────────────────────
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+env/
+
+# ─── Jupyter / Databricks Notebooks ──────────────────────────────────────────
+.ipynb_checkpoints/
+*.ipynb
+
+# ─── Checkpoints do Auto Loader (gerados em runtime no Volume) ───────────────
+_checkpoints/
+
+# ─── IDEs ─────────────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ─── OS ───────────────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ─── Logs locais ──────────────────────────────────────────────────────────────
+*.log
