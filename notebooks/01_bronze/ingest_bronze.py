@@ -35,6 +35,8 @@ def ingest_csv_to_bronze(file_name: str, table_name: str):
         .option("cloudFiles.schemaLocation", checkpoint_path + "/schema") \
         .option("pathGlobFilter", file_name) \
         .option("header", "true") \
+        .option("multiLine", "true") \
+        .option("escape", '"') \
         .load(directory_path)
         
     # 2. Adicionar metadados obrigatórios (AC Story 2.1 e 1.4)
