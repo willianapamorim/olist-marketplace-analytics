@@ -12,13 +12,11 @@ from pyspark.sql.types import IntegerType, StringType
 
 def add_ingestion_metadata(df: DataFrame) -> DataFrame:
     """
-    Adiciona metadados de ingestão a qualquer DataFrame Bronze.
+    Adiciona metadados de ingestao a qualquer DataFrame Bronze.
 
     Campos adicionados:
-        _ingestion_timestamp: Timestamp do momento de ingestão
-        _source_file: Caminho do arquivo de origem (disponível via Auto Loader)
-
-    AC: Story 1.4 — add_ingestion_metadata adiciona _ingestion_timestamp e _source_file
+        _ingestion_timestamp: Timestamp do momento de ingestao
+        _source_file: Caminho do arquivo de origem
     """
     return df \
         .withColumn("_ingestion_timestamp", F.current_timestamp()) \
@@ -34,40 +32,22 @@ def add_ingestion_metadata(df: DataFrame) -> DataFrame:
 def create_surrogate_key(df: DataFrame, col_name: str) -> DataFrame:
     """
     Gera uma surrogate key inteira via monotonically_increasing_id().
-
-    Decisão Arquitetural (AD-5): SKs inteiras, Unknown = -1, nunca NULL em FKs.
+    FKs invalidas recebem -1 (AD-5).
 
     Args:
         df: DataFrame de entrada
-        col_name: Nome da coluna a criar (ex: 'customer_key')
-
-    Returns:
-        DataFrame com a nova coluna SK
-
-    AC: Story 1.4 — create_surrogate_key gera int via monotonically_increasing_id()
+        col_name: Nome da coluna a criar
     """
     return df.withColumn(col_name, F.monotonically_increasing_id().cast(IntegerType()))
 
 
 def calc_regiao_brasil(df: DataFrame, state_col: str = "state") -> DataFrame:
     """
-    Mapeia UF brasileira para macrorregião geográfica.
-
-    Mapeamento:
-        Norte:       AM, RR, AP, PA, TO, RO, AC
-        Nordeste:    MA, PI, CE, RN, PB, PE, AL, SE, BA
-        Centro-Oeste: MT, MS, GO, DF
-        Sudeste:     SP, RJ, MG, ES
-        Sul:         PR, SC, RS
+    Mapeia sigla de estado brasileiro para macrorregiao geografica.
 
     Args:
         df: DataFrame com coluna de UF
-        state_col: Nome da coluna com a sigla do estado (default: 'state')
-
-    Returns:
-        DataFrame com coluna adicional 'regiao_brasil'
-
-    AC: Story 1.4 — calc_regiao_brasil mapeia UF → região
+        state_col: Nome da coluna com a sigla do estado
     """
     return df.withColumn(
         "regiao_brasil",
@@ -82,21 +62,10 @@ def calc_regiao_brasil(df: DataFrame, state_col: str = "state") -> DataFrame:
 
 def calc_sla_fields(df: DataFrame) -> DataFrame:
     """
-    Calcula campos de SLA logístico a partir de datas de entrega do Olist.
+    Calcula campos de SLA logistico a partir das datas de entrega.
 
-    Campos calculados:
-        dias_para_entrega: Dias entre purchase e delivered (int, nulo se não entregue)
-        dias_estimados:    Dias entre purchase e estimated_delivery (int)
-        entregue_no_prazo: True se delivered <= estimated (boolean)
-        dias_atraso:       delivered - estimated em dias (negativo = adiantado, positivo = atrasado)
-
-    Decisão Arquitetural (AD-6): SLA é atributo de negócio de primeira classe,
-    calculado na Silver e promovido para fact_sales.
-
-    Colunas de entrada esperadas:
-        order_purchase_timestamp, order_delivered_customer_date, order_estimated_delivery_date
-
-    AC: Story 1.4 — calc_sla_fields calcula dias_para_entrega, entregue_no_prazo, dias_atraso
+    Campos gerados: dias_para_entrega, dias_estimados, entregue_no_prazo, dias_atraso.
+    Colunas de entrada: order_purchase_timestamp, order_delivered_customer_date, order_estimated_delivery_date.
     """
     return df \
         .withColumn(
