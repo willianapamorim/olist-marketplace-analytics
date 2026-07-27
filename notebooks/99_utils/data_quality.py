@@ -65,8 +65,7 @@ def log_quality_check(
 
     df = spark.createDataFrame(row, schema=get_quality_logs_schema())
     df.write.format("delta").mode("append").saveAsTable(target_table)
-
-    status = "✅ PASSOU" if passed else "❌ FALHOU"
+    status = "PASS" if passed else "FAIL"
     print(f"  [{status}] {layer}.{table_name} | {check_name} | count={record_count} | {detail or ''}")
 
 
@@ -170,7 +169,7 @@ def abort_on_critical_failure(check_name: str, passed: bool, detail: str = None)
         RuntimeError: Com descrição do check que falhou
     """
     if not passed:
-        msg = f"🚨 QUALITY CHECK CRÍTICO FALHOU: {check_name}"
+        msg = f"QUALITY CHECK CRITICO FALHOU: {check_name}"
         if detail:
             msg += f"\n   Detalhe: {detail}"
         raise RuntimeError(msg)
@@ -195,4 +194,4 @@ def create_quality_logs_table(spark: SparkSession, layer: str, catalog: str = "w
         USING DELTA
         COMMENT 'Quality check logs — camada {layer}'
     """)
-    print(f"  ✅ Tabela de logs criada/verificada: {target}")
+    print(f"  Tabela de logs criada/verificada: {target}")
