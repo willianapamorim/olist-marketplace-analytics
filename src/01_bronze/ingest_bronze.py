@@ -1,5 +1,5 @@
 import sys
-sys.path.insert(0, "/Workspace/Repos/willianapamorim@gmail.com/olist-marketplace-analytics/notebooks/99_utils")
+sys.path.insert(0, "/Workspace/Repos/willianapamorim@gmail.com/olist-marketplace-analytics/src/99_utils")
 
 from config import Config
 from transformations import add_ingestion_metadata
@@ -64,8 +64,3 @@ def run_bronze_ingestion(spark: SparkSession):
         ingest_csv_to_bronze(spark, csv_file, table_name)
 
     print("Rotina de ingestao Bronze concluida com sucesso")
-
-
-if __name__ == "__main__":
-    spark_session = SparkSession.builder.getOrCreate()
-    run_bronze_ingestion(spark_session)

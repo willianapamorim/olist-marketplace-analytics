@@ -7,7 +7,6 @@ from pyspark.sql import DataFrame
 from pyspark.sql import functions as F
 from pyspark.sql.types import IntegerType, StringType
 
-# COMMAND ----------
 
 
 def add_ingestion_metadata(df: DataFrame) -> DataFrame:

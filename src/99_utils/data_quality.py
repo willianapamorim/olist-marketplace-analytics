@@ -8,7 +8,6 @@ from pyspark.sql import DataFrame, SparkSession
 from pyspark.sql import functions as F
 from pyspark.sql.types import StructType, StructField, StringType, IntegerType, BooleanType, TimestampType, LongType
 
-# COMMAND ----------
 
 
 def get_quality_logs_schema() -> StructType:

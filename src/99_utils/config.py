@@ -101,13 +101,3 @@ class Config:
     GEO_LNG_MAX = -34.0
 
 
-# COMMAND ----------
-
-# Teste básico ao importar
-if __name__ == "__main__":
-    print(f"✅ Config carregado com sucesso")
-    print(f"   Catálogo: {Config.CATALOG_NAME}")
-    print(f"   Bronze: {Config.bronze('olist_orders')}")
-    print(f"   Silver: {Config.silver('orders_enriched')}")
-    print(f"   Gold: {Config.gold('fact_sales')}")
-    print(f"   Volume: {Config.RAW_VOLUME_PATH}")

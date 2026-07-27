@@ -1,5 +1,5 @@
 import sys
-sys.path.insert(0, "/Workspace/Repos/willianapamorim@gmail.com/olist-marketplace-analytics/notebooks/99_utils")
+sys.path.insert(0, "/Workspace/Repos/willianapamorim@gmail.com/olist-marketplace-analytics/src/99_utils")
 
 from config import Config
 from data_quality import log_quality_check, check_count_positive, check_null_rate, check_date_range, check_value_range, abort_on_critical_failure
@@ -43,8 +43,3 @@ def run_bronze_quality_checks(spark: SparkSession):
     abort_on_critical_failure("Valores invalidos identificados em review_score", passed)
 
     print("Quality Checks da camada Bronze processados e validados")
-
-
-if __name__ == "__main__":
-    spark_session = SparkSession.builder.getOrCreate()
-    run_bronze_quality_checks(spark_session)
