@@ -1,5 +1,5 @@
 import sys
-sys.path.insert(0, "/Workspace/Repos/willianapamorim@gmail.com/olist-marketplace-analytics/src/99_utils")
+sys.path.insert(0, "/Workspace/Users/willianapamorim@gmail.com/olist-marketplace-analytics/src/99_utils")
 
 from config import Config
 from data_quality import log_quality_check, check_count_positive, check_null_rate, check_date_range, check_value_range, abort_on_critical_failure

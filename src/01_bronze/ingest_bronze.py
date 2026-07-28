@@ -1,5 +1,5 @@
 import sys
-sys.path.insert(0, "/Workspace/Repos/willianapamorim@gmail.com/olist-marketplace-analytics/src/99_utils")
+sys.path.insert(0, "/Workspace/Users/willianapamorim@gmail.com/olist-marketplace-analytics/src/99_utils")
 
 from config import Config
 from transformations import add_ingestion_metadata

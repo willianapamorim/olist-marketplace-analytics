@@ -7,7 +7,7 @@ ai_analyze_sentiment() nos comentarios para classificar o sentimento
 """
 
 import sys
-sys.path.insert(0, "/Workspace/Repos/willianapamorim@gmail.com/olist-marketplace-analytics/src/99_utils")
+sys.path.insert(0, "/Workspace/Users/willianapamorim@gmail.com/olist-marketplace-analytics/src/99_utils")
 
 from pyspark.sql import SparkSession, DataFrame
 from config import Config
@@ -18,7 +18,6 @@ def enrich_sentiment(spark: SparkSession) -> DataFrame:
     Aplica analise de sentimento nos comentarios preenchidos usando AI Functions
     do Databricks.
     """
-    # Apenas enviamos para a IA os comentarios que realmente existem, para economizar custo/tempo.
     df = spark.sql(f"""
         SELECT
             review_id,
