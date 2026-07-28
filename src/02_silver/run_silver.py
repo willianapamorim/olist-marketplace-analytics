@@ -7,5 +7,7 @@ sys.path.insert(0, "/Workspace/Repos/willianapamorim@gmail.com/olist-marketplace
 sys.path.insert(0, "/Workspace/Repos/willianapamorim@gmail.com/olist-marketplace-analytics/src/02_silver")
 
 from transform_geolocation import transform_geolocation
+from transform_orders import transform_orders
 
 transform_geolocation(spark)
+transform_orders(spark)
