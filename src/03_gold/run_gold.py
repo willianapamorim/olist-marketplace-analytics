@@ -9,5 +9,10 @@ sys.path.insert(0, "/Workspace/Users/willianapamorim@gmail.com/olist-marketplace
 sys.path.insert(0, "/Workspace/Users/willianapamorim@gmail.com/olist-marketplace-analytics/src/03_gold")
 
 from transform_dimensions import transform_dimensions
+from transform_calendar import build_dim_calendar
+from transform_facts import transform_facts
 
+# Executa as transformacoes
 transform_dimensions(spark)
+build_dim_calendar(spark)
+transform_facts(spark)
