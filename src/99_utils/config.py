@@ -71,6 +71,7 @@ class Config:
     GOLD_DIM_SELLERS = "dim_sellers"
     GOLD_DIM_TIME = "dim_time"
     GOLD_FACT_SALES = "fact_sales"
+    GOLD_FACT_ORDER_ITEMS = "fact_order_items"
     GOLD_FACT_REVIEWS = "fact_reviews"
     GOLD_KPI_MONTHLY = "kpi_marketplace_monthly"
 

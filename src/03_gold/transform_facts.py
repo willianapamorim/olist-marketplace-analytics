@@ -69,11 +69,34 @@ def build_fact_reviews(spark: SparkSession) -> None:
     print(f"fact_reviews processada: {df.count()} avaliacoes contabilizadas.")
 
 
+def build_fact_order_items(spark: SparkSession) -> None:
+    """
+    Constroi a tabela fato de itens do pedido (grao: order_item_id).
+    Permite relacionar orders (através do order_id) aos produtos e vendedores.
+    """
+    df = spark.sql(f"""
+        SELECT 
+            order_id,
+            order_item_id,
+            product_id,
+            seller_id,
+            price AS preco_produto,
+            freight_value AS valor_frete,
+            (price + freight_value) AS valor_total_item
+        FROM {Config.bronze(Config.BRONZE_ORDER_ITEMS)}
+    """)
+    
+    df.write.format("delta").mode("overwrite").option("overwriteSchema", "true") \
+        .saveAsTable(Config.gold(Config.GOLD_FACT_ORDER_ITEMS))
+    print(f"fact_order_items processada: {df.count()} itens contabilizados.")
+
+
 def transform_facts(spark: SparkSession) -> None:
     """
     Orquestra a geracao das tabelas Fato.
     """
     print("Iniciando construcao da Camada Gold: Tabelas Fato")
     build_fact_sales(spark)
+    build_fact_order_items(spark)
     build_fact_reviews(spark)
     print("Todas as Tabelas Fato foram gravadas com sucesso no catalogo Gold.")

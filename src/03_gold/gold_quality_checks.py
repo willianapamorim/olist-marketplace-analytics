@@ -26,6 +26,7 @@ def run_gold_quality_checks(spark: SparkSession) -> None:
         "dim_products": Config.gold(Config.GOLD_DIM_PRODUCTS),
         "dim_calendar": Config.gold(Config.GOLD_DIM_TIME),
         "fact_sales": Config.gold(Config.GOLD_FACT_SALES),
+        "fact_order_items": Config.gold(Config.GOLD_FACT_ORDER_ITEMS),
         "fact_reviews": Config.gold(Config.GOLD_FACT_REVIEWS),
         "kpi_monthly": Config.gold(Config.GOLD_KPI_MONTHLY)
     }
