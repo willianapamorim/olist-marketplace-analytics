@@ -12,13 +12,13 @@ _bmad-output/
 .github/
 design-artifacts/
 
-# ─── Dados brutos (nunca commitar os CSVs originais) ─────────────────────────
-data/raw/
-data/raw/*.csv
+# ─── Dados brutos (Permitido para fins de portfolio) ─────────────────────────
+# data/raw/
+# data/raw/*.csv
 
-# ─── Power BI (arquivo binário, gerenciar externamente) ───────────────────────
-*.pbix
-powerbi/*.pbix
+# ─── Power BI (Permitido para fins de portfolio) ───────────────────────
+# *.pbix
+# powerbi/*.pbix
 
 # ─── Credenciais e variáveis de ambiente ──────────────────────────────────────
 *.env

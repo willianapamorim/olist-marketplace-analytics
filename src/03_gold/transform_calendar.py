@@ -1,8 +1,8 @@
 """
 Story 4.2 — Criacao da Tabela de Dimensao Calendario (Tempo) na Camada Gold.
 
-Gera dinamicamente uma tabela de calendario usando sequence() do Spark SQL,
-cobrindo todo o periodo do dataset Olist (2016 a 2019).
+Gera dinamicamente uma tabela de calendario usando sequence() do Spark,
+cobrindo todo o periodo do dataset.
 """
 
 import sys
